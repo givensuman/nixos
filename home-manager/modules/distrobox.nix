@@ -1,0 +1,19 @@
+# https://mynixos.com/home-manager/option/programs.distrobox
+{
+  programs.distrobox = {
+    enable = true;
+    settings = {
+      container_image_default="registry.fedoraproject.org/fedora-toolbox:42";
+      container_name_default="toolbox";
+      container_additional_volumes=[
+        "/nix/store:/nix/store:ro"
+        "/run/current-system:/run/current-system:ro"
+        "/etc/static/profiles/per-user:/etc/static/profiles/per-user:ro"
+        "etc/profiles/per-user:/etc/profiles/per-user:ro"
+      ];
+      container_pre_init_hook=''
+        export PATH=\$PATH:/run/current-system/sw/bin; export SHELL=$(which fish);"
+      '';
+    };
+  };
+}
