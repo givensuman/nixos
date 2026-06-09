@@ -6,7 +6,7 @@
     ./modules/containers.nix
     ./modules/desktop.nix
     ./modules/framework.nix
-    ./modules/neovim.nix
+    ./modules/programming.nix
     ./modules/styles.nix
     ./modules/system.nix
     ./modules/world.nix

@@ -16,7 +16,6 @@
     ./modules/ghostty.nix
     ./modules/git.nix
     ./modules/lazygit.nix
-    ./modules/mise.nix
 
     inputs.catppuccin.homeModules.catppuccin
   ];
