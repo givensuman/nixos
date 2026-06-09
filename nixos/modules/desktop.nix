@@ -1,4 +1,3 @@
-# Everything related to the desktop environment and/or default applications goes here.
 { pkgs, inputs, ... }:
 {
   imports = [
@@ -15,17 +14,15 @@
       name = "gnome-nightly";
       location = "https://nightly.gnome.org/gnome-nightly.flatpakrepo";
     }
-    # {
-    #   name = "cosmic";
-    #   location = "https://apt.pop-os.org/cosmic/cosmic.flatpakrepo";
-    # }
+    {
+      name = "cosmic";
+      location = "https://apt.pop-os.org/cosmic/cosmic.flatpakrepo";
+    }
   ];
 
   services.flatpak.packages = [
     # Runtimes
     "org.freedesktop.Platform/x86_64/25.08"
-    # Desktop applications
-    # "org.mozilla.firefox"
     # Flatpak utilities
     "com.github.tchx84.Flatseal"
     "io.github.flattool.Warehouse"
@@ -44,9 +41,9 @@
     "org.gnome.Maps"
     "org.gnome.Papers" # Document Viewer
     "org.gnome.Showtime" # Video Player
-    # "org.gnome.Snapshot" # Camera
+    "org.gnome.Snapshot" # Camera
     "org.gnome.TextEditor"
-    # "org.gnome.Weather"
+    "org.gnome.Weather"
     "org.gtk.Gtk3theme.adw-gtk3"
     "org.gtk.Gtk3theme.adw-gtk3-dark"
   ];
@@ -71,13 +68,7 @@
     };
   };
 
-  # environment.systemPackages = with pkgs; [
-  #   # Apps
-  #   ghostty
-  #   bazaar
-  # ];
-
-  # Use COSMIC desktop.
+  # https://wiki.nixos.org/wiki/COSMIC
   services.displayManager.cosmic-greeter.enable = true;
   services.desktopManager.cosmic.enable = true;
   services.system76-scheduler.enable = true;

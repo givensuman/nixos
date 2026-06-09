@@ -1,4 +1,3 @@
-# Hardware configuration for Frameowkr 13 laptop.
 { inputs, ... }:
 {
   imports = [

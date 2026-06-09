@@ -1,4 +1,3 @@
-# Everything related to programming goes here.
 { pkgs, ... }:
 let
   languages = with pkgs; [
@@ -8,10 +7,37 @@ let
     gopls
     golangci-lint
     golangci-lint-langserver
-    nodejs
+    nodejs_latest
     pipx
     python3
     rustc
+  ];
+
+  # derived from :checkhealth
+  lazyvim_dependencies = with pkgs; [
+    # copilot.nvim
+    copilot-language-server
+    # conform.nvim
+    nixfmt-rfc-style
+    prettier
+    markdown-toc
+    markdownlint-cli2
+    shellcheck
+    shfmt
+    rust-analyzer
+    # nvim-treesitter
+    tree-sitter
+    # sidekick.nvim
+    tmux
+    # Snacks.image
+    imagemagick
+    tectonic
+    # Snacks.picker
+    sqlite
+    # ...
+    luajit
+    luajitPackages.rocks-nvim
+    statix
   ];
 in
 {
@@ -26,38 +52,5 @@ in
     ];
   };
 
-  # :checkhealth
-  environment.systemPackages =
-    languages
-    ++ (with pkgs; [
-      # copilot.nvim
-      copilot-language-server
-
-      # conform.nvim
-      nixfmt-rfc-style
-      prettier
-      markdown-toc
-      markdownlint-cli2
-      shellcheck
-      shfmt
-      rust-analyzer
-
-      # nvim-treesitter
-      tree-sitter
-
-      # sidekick.nvim
-      tmux
-
-      # Snacks.image
-      imagemagick
-      tectonic
-
-      # Snacks.picker
-      sqlite
-
-      # ...
-      luajit
-      luajitPackages.rocks-nvim
-      statix
-    ]);
+  environment.systemPackages = languages ++ lazyvim_dependencies;
 }

@@ -1,4 +1,3 @@
-# System configuration.
 { pkgs, ... }:
 {
   programs.fish = {

@@ -1,4 +1,3 @@
-# Everything related to containerization goes here.
 # https://nixos.wiki/wiki/Podman
 # https://nixos.wiki/wiki/Docker
 { pkgs, ... }:

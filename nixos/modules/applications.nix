@@ -6,22 +6,21 @@
 
   services.flatpak.packages = [
     # Pinned
+    "io.podman_desktop.PodmanDesktop"
+    "org.localsend.localsend_app"
     "com.spotify.Client"
     "io.github.milkshiift.GoofCord"
-    "org.localsend.localsend_app"
-    "de.haeckerfelix.Fragments"
-    "io.podman_desktop.PodmanDesktop"
     # Additional
-    # "dev.edfloreshz.Tasks" # To-Do list
+    "de.haeckerfelix.Fragments"
     "org.nickvision.tubeconverter" # Media downloader
     "io.github.kriptolix.Poliedros" # Dice roller
-    "de.til7701.Puzzled" # Lil' puzzles
     "com.obsproject.Studio"
     "org.kde.kdenlive"
   ];
 
   environment.systemPackages = with pkgs; [
     bazaar
+    firefox
     ghostty
     steam
   ];

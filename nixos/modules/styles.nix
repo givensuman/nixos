@@ -1,4 +1,3 @@
-# Everything related to styling and theming goes here.
 {
   pkgs,
   inputs,
