@@ -15,6 +15,7 @@
     flatpaks.url = "github:gmodena/nix-flatpak";
     stylix.url = "github:nix-community/stylix";
     catppuccin.url = "github:catppuccin/nix";
+    noctalia.url = "github:noctalia-dev/noctalia-shell";
   };
 
   outputs =

@@ -40,6 +40,10 @@
   # Enable networking.
   networking.networkmanager.enable = true;
   networking.hostName = "gandalf";
+  hardware.bluetooth.enable = true;
+
+  services.upower.enable = true;
+  services.power-profiles-daemon.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/New_York";

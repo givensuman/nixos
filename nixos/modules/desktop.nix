@@ -71,16 +71,17 @@
     };
   };
 
-  environment.systemPackages = with pkgs; [
-    # Apps
-    ghostty
-    bazaar
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   # Apps
+  #   ghostty
+  #   bazaar
+  # ];
 
   # Use COSMIC desktop.
   services.displayManager.cosmic-greeter.enable = true;
   services.desktopManager.cosmic.enable = true;
   services.system76-scheduler.enable = true;
+  environment.sessionVariables.COSMIC_DATA_CONTROL_ENABLED = 1;
   environment.cosmic.excludePackages = with pkgs; [
     cosmic-edit # Prefer GTK
     cosmic-player

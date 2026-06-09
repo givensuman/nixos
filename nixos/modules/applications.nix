@@ -21,6 +21,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    bazaar
+    ghostty
     steam
   ];
 }

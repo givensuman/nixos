@@ -4,7 +4,6 @@
     ./modules/cosmic/default.nix
     ./modules/fish/default.nix
     ./modules/gh/default.nix
-    ./modules/mise/default.nix
     ./modules/neovim/default.nix
     ./modules/opencode/default.nix
     ./modules/wallpapers/default.nix
@@ -17,6 +16,7 @@
     ./modules/ghostty.nix
     ./modules/git.nix
     ./modules/lazygit.nix
+    ./modules/mise.nix
 
     inputs.catppuccin.homeModules.catppuccin
   ];
