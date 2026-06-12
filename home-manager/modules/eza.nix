@@ -3,8 +3,9 @@
   programs.eza = {
     enable = true;
     enableBashIntegration = true;
-    enableFishIntegration = true;
+    enableFishIntegration = false; # use fish-eza plugin
   };
+
   catppuccin.eza = {
     enable = true;
     accent = "blue";

@@ -9,8 +9,7 @@ _go-sudo:
   @sudo --validate
 
 # Rebuild system and home configurations
-[group('util')]
-rebuild: _go-sudo _nix-switch _hm-switch
+rebuild: _go-sudo _nix-switch _hm-switch _stow
 
 # Build and activate new system configuration
 [group('nixos')]
@@ -66,3 +65,12 @@ _hm-build:
 [group('home-manager')]
 _hm-generations:
   home-manager generations --flake .#{{ user }}@{{ host }}
+
+# Stow config files
+_stow:
+  #!/usr/bin/env bash
+  for dir in ./stow/*/; do
+      pkg=$(basename "$dir")
+
+      stow -d ./stow -t "$HOME" -R "$pkg"
+  done

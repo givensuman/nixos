@@ -1,7 +1,6 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ./modules/cosmic/default.nix
     ./modules/gh/default.nix
     ./modules/neovim/default.nix
     ./modules/opencode/default.nix

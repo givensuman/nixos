@@ -61,6 +61,7 @@
     zip
     p7zip
     gnutar
+    stow
     # Runners
     gnumake
     just
