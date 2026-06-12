@@ -8,6 +8,7 @@ let
     golangci-lint
     golangci-lint-langserver
     nodejs_latest
+    odin
     pipx
     python3
     rustc

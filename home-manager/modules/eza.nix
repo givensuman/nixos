@@ -5,5 +5,8 @@
     enableBashIntegration = true;
     enableFishIntegration = true;
   };
-  catppuccin.eza.enable = true;
+  catppuccin.eza = {
+    enable = true;
+    accent = "blue";
+  };
 }

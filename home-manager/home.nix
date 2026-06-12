@@ -2,7 +2,6 @@
 {
   imports = [
     ./modules/cosmic/default.nix
-    ./modules/fish/default.nix
     ./modules/gh/default.nix
     ./modules/neovim/default.nix
     ./modules/opencode/default.nix
@@ -12,6 +11,7 @@
     ./modules/distrobox.nix
     ./modules/eza.nix
     ./modules/firefox.nix
+    ./modules/fish.nix
     ./modules/fzf.nix
     ./modules/ghostty.nix
     ./modules/git.nix

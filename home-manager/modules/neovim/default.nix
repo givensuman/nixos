@@ -2,7 +2,7 @@
 { pkgs, ... }:
 {
   home.packages = [ pkgs.neovim ];
-  xdg.configFile."nvim" = {
+  home.file."nvim" = {
     source = ./nvim;
     recursive = true;
   };
