@@ -12,10 +12,10 @@
     "io.github.milkshiift.GoofCord"
     # Additional
     "de.haeckerfelix.Fragments"
-    "org.nickvision.tubeconverter" # Media downloader
-    "io.github.kriptolix.Poliedros" # Dice roller
+    "org.nickvision.tubeconverter"
     "com.obsproject.Studio"
     "org.kde.kdenlive"
+    "org.blender.Blender"
   ];
 
   environment.systemPackages = with pkgs; [

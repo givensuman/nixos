@@ -1,16 +1,11 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ./modules/gh/default.nix
-    ./modules/neovim/default.nix
-    ./modules/opencode/default.nix
-    ./modules/wallpapers/default.nix
     ./modules/bat.nix
     ./modules/bottom.nix
     ./modules/distrobox.nix
     ./modules/eza.nix
     ./modules/firefox.nix
-    ./modules/fish.nix
     ./modules/fzf.nix
     ./modules/ghostty.nix
     ./modules/git.nix
@@ -35,6 +30,9 @@
   programs.fd.enable = true;
   home.packages = with pkgs; [
     delve
+    github-cli # in /stow
+    neovim # in /stow
+    opencode # in /stow
     ripgrep
     zoxide
   ];
