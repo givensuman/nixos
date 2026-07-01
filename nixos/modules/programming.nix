@@ -53,5 +53,18 @@ in
     ];
   };
 
-  environment.systemPackages = languages ++ lazyvim_dependencies;
+  environment.systemPackages =
+    with pkgs;
+    [
+      neovim
+      vscode
+    ]
+    ++ languages
+    ++ lazyvim_dependencies;
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    enableFishIntegration = true;
+  };
 }
