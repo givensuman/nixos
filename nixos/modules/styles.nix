@@ -27,6 +27,7 @@
         package = pkgs.noto-fonts-color-emoji;
         name = "Noto Color Emoji";
       };
+
       serif = config.stylix.fonts.sansSerif;
     };
   };

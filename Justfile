@@ -9,52 +9,52 @@ _go-sudo:
   @sudo --validate
 
 # Rebuild everything
-rebuild: _go-sudo _nix-switch _hm-switch _stow
+rebuild: _go-sudo _nixos-switch _hm-switch _stow
 
 # Run `switch` for system and home configurations
-switch: _nix-switch _hm-switch
+switch: _nixos-switch _hm-switch
 
 # Run `build` for system and home configurations
-build: _nix-build _hm-build
+build: _nixos-build _hm-build
 
 # Build and activate new system configuration
 [group('nixos')]
-_nix-switch args='':
-    sudo nixos-rebuild --flake '#{{ hostname }}' switch {{ args }}
+_nixos-switch args='':
+    sudo nixos-rebuild --flake '#{{ hostname }}' switch --upgrade {{ args }}
 
 # Build system configuration as a dry-run
 [group('nixos')]
-_nix-build args='':
+_nixos-build args='':
     sudo nixos-rebuild --flake '#{{ hostname }}' build {{ args }}
 
 # Build and activate, with rollback on failure
 [group('nixos')]
-_nix-test args='':
+_nixos-test args='':
     sudo nixos-rebuild --flake '#{{ hostname }}' test {{ args }}
 
 # Switch to previous generation
 [group('nixos')]
-_nix-rollback:
+_nixos-rollback:
     sudo /run/current-system/bin/switch-to-configuration switch
 
 # Build documentation
 [group('nixos')]
-_nix-docs:
+_nixos-docs:
     nixos-rebuild --flake '#{{ hostname }}' build --build-llvm-tools
 
 # Update flake inputs
 [group('nixos')]
-_nix-update:
+_nixos-update:
     nix flake update
 
 # Clean nix store
 [group('nixos')]
-_nix-clean:
+_nixos-clean:
     sudo nix-collect-garbage -d
 
 # Show current system generations
 [group('nixos')]
-_nix-generations:
+_nixos-generations:
     nix-env -p /nix/var/nix/profiles/system --list-generations
 
 # Build and activate new home configuration

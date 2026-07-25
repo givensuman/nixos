@@ -9,6 +9,7 @@ Some(([
     "com.system76.CosmicAppletBattery",
     "com.system76.CosmicAppletNotifications",
     "com.system76.CosmicAppletBluetooth",
+    "dev.DBrox.CosmicPrivacyIndicator",
     "io.github.cosmic_utils.weather-applet",
     "com.system76.CosmicAppletTime",
     "com.system76.CosmicAppletPower",

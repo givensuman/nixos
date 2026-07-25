@@ -19,7 +19,7 @@ let
     # copilot.nvim
     copilot-language-server
     # conform.nvim
-    nixfmt-rfc-style
+    nixfmt
     prettier
     markdown-toc
     markdownlint-cli2
