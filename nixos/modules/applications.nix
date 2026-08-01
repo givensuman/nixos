@@ -16,6 +16,8 @@
     "com.obsproject.Studio"
     "org.kde.kdenlive"
     "org.blender.Blender"
+    "org.inkscape.Inkscape"
+    "org.gimp.GIMP"
   ];
 
   environment.systemPackages = with pkgs; [
