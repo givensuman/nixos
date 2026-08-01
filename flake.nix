@@ -27,20 +27,30 @@
     }@inputs:
     {
       # NixOS configuration entrypoint
-      # Available through 'nixos-rebuild --flake .#your-hostname'
-      nixosConfigurations.gandalf = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [ ./nixos/configuration.nix ];
+      # Available through 'nixos-rebuild --flake .#hostname'
+      nixosConfigurations = {
+        gandalf = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./nixos/hosts/gandalf/configuration.nix ];
+        };
+        work-desktop = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [ ./nixos/hosts/work-desktop/configuration.nix ];
+        };
       };
 
       # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#your-username@your-hostname'
+      # Available through 'home-manager --flake .#username@hostname'
       homeConfigurations = {
         "given@gandalf" = home-manager.lib.homeManagerConfiguration {
-          # Home-manager requires 'pkgs' instance
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/home.nix ];
+          modules = [ ./home-manager/hosts/gandalf.nix ];
+        };
+        "given@work-desktop" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [ ./home-manager/hosts/work-desktop.nix ];
         };
       };
     };

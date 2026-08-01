@@ -1,29 +1,17 @@
-# NixOS configuration and main entry point.
-# See configuration.nix(5) man page or `nixos-help`
+{ inputs, ... }:
 {
   imports = [
-    ./modules/applications.nix
-    ./modules/containers.nix
-    ./modules/desktop.nix
-    ./modules/framework.nix
-    ./modules/programming.nix
-    ./modules/styles.nix
-    ./modules/system.nix
-    ./modules/world.nix
-
-    ./hardware-configuration.nix
+    ../../roles/desktop.nix
+    ./hardware.nix
   ];
 
   # Bootloader.
   boot = {
     loader = {
       systemd-boot.editor = false;
-      # Use the systemd-boot EFI boot loader.
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
-    # Silent Boot
-    # https://wiki.archlinux.org/title/Silent_boot
     kernelParams = [
       "quiet"
       "splash"
@@ -33,17 +21,12 @@
       "udev.log_priority=3"
     ];
     consoleLogLevel = 0;
-    # https://github.com/NixOS/nixpkgs/pull/108294
     initrd.verbose = false;
   };
 
   # Enable networking.
   networking.networkmanager.enable = true;
-  networking.hostName = "gandalf";
-  hardware.bluetooth.enable = true;
-
-  services.upower.enable = true;
-  services.power-profiles-daemon.enable = true;
+  networking.hostName = "work-desktop";
 
   # Set your time zone.
   time.timeZone = "America/New_York";
