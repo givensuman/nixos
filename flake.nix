@@ -38,6 +38,9 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
+              home-manager.sharedModules = [
+                inputs.catppuccin.homeModules.catppuccin
+              ];
               home-manager.extraSpecialArgs = { inherit inputs username hostname; };
             }
           ];

@@ -3,6 +3,7 @@
   username,
   ...
 }:
+# for writing code and Umamusume fanfiction
 let
   # derived from :checkhealth
   lazyvim_dependencies = with pkgs; [
@@ -57,7 +58,7 @@ in
     enableFishIntegration = true;
   };
 
-  home-manager.user.${username} = {
+  home-manager.users.${username} = {
     programs.helix = {
       enable = true;
       settings = {

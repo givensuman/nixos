@@ -66,10 +66,11 @@
     ];
   };
 
-  home-manager.user.${username} = {
+  home-manager.users.${username} = {
     home = {
       inherit username;
       homeDirectory = "/home/${username}";
+      stateVersion = "26.05";
     };
   };
 
@@ -93,5 +94,4 @@
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.11";
-  home.stateVersion = "26.05";
 }

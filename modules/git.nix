@@ -1,15 +1,10 @@
 {
   pkgs,
-  inputs,
   username,
   ...
 }:
 {
-  imports = [
-    inputs.catppuccin.nixosModules.catppuccin
-  ];
-
-  home-manager.user.${username} = {
+  home-manager.users.${username} = {
     # https://mynixos.com/home-manager/options/programs.git
     programs.git = {
       enable = true;
@@ -84,6 +79,8 @@
     };
     catppuccin.lazygit.enable = true;
 
-    home.packages = pkgs.github-cli; # in /stow
+    home.packages = [
+      pkgs.github-cli # in /stow
+    ];
   };
 }

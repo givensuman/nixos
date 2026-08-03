@@ -22,10 +22,6 @@
     '';
   };
 
-  imports = [
-    inputs.catppuccin.nixosModules.catppuccin
-  ];
-
   home-manager.users.${username} = {
     # https://mynixos.com/home-manager/options/programs.bat
     programs.bat = {
@@ -53,17 +49,17 @@
       enable = true;
       accent = "blue";
     };
+
+    home.packages = with pkgs; [
+      ripgrep
+      zoxide
+    ];
+
+    # https://mynixos.com/home-manager/options/programs.fzf
+    programs.fzf.enable = true;
+    catppuccin.fzf.enable = true;
+
+    # https://mynixos.com/home-manager/options/programs.fd
+    programs.fd.enable = true;
   };
-
-  # https://mynixos.com/home-manager/options/programs.fzf
-  programs.fzf.enable = true;
-  catppuccin.fzf.enable = true;
-
-  # https://mynixos.com/home-manager/options/programs.fd
-  programs.fd.enable = true;
-
-  home.packages = with pkgs; [
-    ripgrep
-    zoxide
-  ];
 }

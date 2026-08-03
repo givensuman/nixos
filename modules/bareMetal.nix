@@ -5,23 +5,6 @@
   ...
 }:
 {
-  programs.fish = {
-    enable = true;
-    useBabelfish = true;
-  };
-
-  # Launch Fish shell for interactive Bash sessions.
-  # https://nixos.wiki/wiki/Fish#Setting_fish_as_your_shell
-  programs.bash = {
-    interactiveShellInit = ''
-      if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
-      then
-        shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
-        exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
-      fi
-    '';
-  };
-
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -89,7 +72,7 @@
 
   # Enable networking.
   networking.networkmanager.enable = true;
-  networking.hostName = "${username}.${hostname}";
+  networking.hostName = username;
   hardware.bluetooth.enable = true;
 
   services.upower.enable = true;

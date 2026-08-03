@@ -1,13 +1,8 @@
 {
   username,
-  inputs,
   ...
 }:
 {
-  imports = [
-    inputs.catppuccin.nixosModules.catppuccin
-  ];
-
   home-manager.users.${username} = {
     # https://mynixos.com/home-manager/option/programs.ghostty
     programs.ghostty = {
@@ -16,7 +11,7 @@
       enableFishIntegration = true;
       installBatSyntax = true;
       settings = {
-        theme = "catppuccin-mocha";
+        # theme = "catppuccin-mocha";
 
         window-padding-x = 15;
         window-padding-y = 5;

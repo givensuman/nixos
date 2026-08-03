@@ -7,7 +7,6 @@
 {
   imports = [
     inputs.flatpaks.nixosModules.nix-flatpak
-    inputs.catppuccin.nixosModules.catppuccin
   ];
 
   services.flatpak.packages = [

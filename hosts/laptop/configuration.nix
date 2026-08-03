@@ -7,16 +7,15 @@
     inputs.hardware.nixosModules.framework-13-7040-amd
 
     ../../modules/applications.nix
+    ../../modules/bareMetal.nix
     ../../modules/cli.nix
     ../../modules/containers.nix
     ../../modules/desktop.nix
     ../../modules/git.nix
-    ../../hardware.nix
     ../../modules/programming.nix
-    ../../modules/styles.nix
     ../../modules/terminal.nix
 
-    ./configuration.nix
+    ../configuration.nix
     ./hardware-configuration.nix
   ];
 

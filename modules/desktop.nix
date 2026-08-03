@@ -8,7 +8,6 @@
   imports = [
     inputs.flatpaks.nixosModules.nix-flatpak
     inputs.stylix.nixosModules.stylix
-    inputs.catppuccin.nixosModules.catppuccin
   ];
 
   services.flatpak.enable = true;
@@ -124,11 +123,6 @@
   };
 
   catppuccin = {
-    enable = true;
-    autoEnable = true;
-    flavor = "mocha";
-    accent = "lavender";
-
     # cursors.enable = true;
     # gtk.icon.enable = true;
     grub.enable = true;

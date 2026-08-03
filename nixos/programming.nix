@@ -54,7 +54,7 @@ in
     enableFishIntegration = true;
   };
 
-  home-manager.user.${username} = {
+  home-manager.users.${username} = {
     programs.helix = {
       enable = true;
       settings = {
