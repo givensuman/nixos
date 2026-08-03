@@ -1,6 +1,4 @@
 {
-  description = "given's NixOS flake";
-
   inputs = {
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -15,7 +13,7 @@
     flatpaks.url = "github:gmodena/nix-flatpak";
     stylix.url = "github:nix-community/stylix";
     catppuccin.url = "github:catppuccin/nix";
-    noctalia.url = "github:noctalia-dev/noctalia-shell";
+    wsl.url = "github:nix-community/NixOS-WSL";
   };
 
   outputs =
@@ -25,33 +23,32 @@
       home-manager,
       ...
     }@inputs:
+    let
+      # Dynamic username for when I legally
+      # change my name to Megatron.
+      username = "given";
+
+      mkHost = # fn
+        hostname:
+        nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs username hostname; };
+          modules = [
+            ./hosts/${hostname}/configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs username hostname; };
+            }
+          ];
+        };
+    in
     {
       # NixOS configuration entrypoint
       # Available through 'nixos-rebuild --flake .#hostname'
       nixosConfigurations = {
-        gandalf = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [ ./nixos/hosts/gandalf/configuration.nix ];
-        };
-        work-desktop = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [ ./nixos/hosts/work-desktop/configuration.nix ];
-        };
-      };
-
-      # Standalone home-manager configuration entrypoint
-      # Available through 'home-manager --flake .#username@hostname'
-      homeConfigurations = {
-        "given@gandalf" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/hosts/gandalf.nix ];
-        };
-        "given@work-desktop" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home-manager/hosts/work-desktop.nix ];
-        };
+        laptop = mkHost "laptop";
+        wsl = mkHost "wsl";
       };
     };
 }

@@ -1,0 +1,26 @@
+{
+  inputs,
+  username,
+  ...
+}:
+{
+  imports = [
+    inputs.wsl.nixosModules.wsl
+
+    ../modules/cli.nix
+    ../modules/containers.nix
+    ../modules/git.nix
+    ../modules/programming.nix
+
+    ./configuration.nix
+    ./hardware-configuration.nix
+  ];
+
+  wsl = {
+    enable = true;
+    wslConf.automount.root = "/mnt";
+    wslConf.interop.appendWindowsPath = false;
+    wslConf.network.generateHosts = false;
+    defaultUser = username;
+  };
+}
