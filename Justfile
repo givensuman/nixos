@@ -1,83 +1,99 @@
-username := "given"
-hostname := "gandalf"
+# -*- mode: justfile -*-
 
-# Show this help
+set shell := ["bash", "-c"]
+set dotenv-load
+
+hostname := `hostname`
+
 default:
     @just --list
 
+[group('util')]
 _go-sudo:
-  @sudo --validate
+    @sudo --validate
+
+[group('util')]
+_validate-hostname HOSTNAME:
+    #!/usr/bin/env bash
+    if [[ ! "{{ HOSTNAME }}" =~ ^(laptop|wsl)$ ]]; then
+        echo "Error: Invalid hostname '{{ HOSTNAME }}'"
+        echo "Valid options are:"
+        printf "\tlaptop\n"
+        printf "\twsl\n"
+        exit 1
+    fi
 
 # Rebuild everything
-rebuild: _go-sudo _nixos-switch _hm-switch _stow
+rebuild HOSTNAME=hostname: \
+    (_nixos-switch HOSTNAME) \
+    (_hm-switch HOSTNAME) \
+    (_stow HOSTNAME)
 
-# Run `switch` for system and home configurations
-switch: _nixos-switch _hm-switch
+# Run switch for system and home configurations
+switch HOSTNAME=hostname: \
+    (_nixos-switch HOSTNAME) \
+    (_hm-switch HOSTNAME)
 
-# Run `build` for system and home configurations
-build: _nixos-build _hm-build
+# Run build for system and home configurations
+build HOSTNAME=hostname: \
+    (_nixos-build HOSTNAME) \
+    (_hm-build HOSTNAME)
 
-# Build and activate new system configuration
-[group('nixos')]
-_nixos-switch args='':
-    sudo nixos-rebuild --flake '#{{ hostname }}' switch --upgrade {{ args }}
+# Update Nix flake inputs
+update: _go-sudo
+    sudo nix flake update
 
-# Build system configuration as a dry-run
-[group('nixos')]
-_nixos-build args='':
-    sudo nixos-rebuild --flake '#{{ hostname }}' build {{ args }}
+# Upgrade current system
+upgrade: _go-sudo
+    #!/usr/bin/env bash
+    sudo nixos-rebuild --flake ".#$(hostname)" switch
 
-# Build and activate, with rollback on failure
-[group('nixos')]
-_nixos-test args='':
-    sudo nixos-rebuild --flake '#{{ hostname }}' test {{ args }}
+# Upgrade current system safely, after reboot
+upgrade-safely-requires-reboot: _go-sudo
+    #!/usr/bin/env bash
+    sudo nixos-rebuild --flake ".#$(hostname)" boot
 
-# Switch to previous generation
-[group('nixos')]
-_nixos-rollback:
-    sudo /run/current-system/bin/switch-to-configuration switch
-
-# Build documentation
-[group('nixos')]
-_nixos-docs:
-    nixos-rebuild --flake '#{{ hostname }}' build --build-llvm-tools
-
-# Update flake inputs
-[group('nixos')]
-_nixos-update:
-    nix flake update
-
-# Clean nix store
-[group('nixos')]
-_nixos-clean:
+# Clean Nix store and remove old generations
+autoremove:
     sudo nix-collect-garbage -d
 
-# Show current system generations
+[group('nixos')]
+_nixos-switch HOSTNAME: (_validate-hostname HOSTNAME) _go-sudo
+    sudo nixos-rebuild --flake ".#{{ HOSTNAME }}" switch
+
+[group('nixos')]
+_nixos-build HOSTNAME: (_validate-hostname HOSTNAME)
+    nixos-rebuild --flake ".#{{ HOSTNAME }}" build
+
+[group('nixos')]
+_nixos-test HOSTNAME: (_validate-hostname HOSTNAME) _go-sudo
+    sudo nixos-rebuild --flake ".#{{ HOSTNAME }}" test
+
+[group('nixos')]
+_nixos-rollback: _go-sudo
+    sudo /run/current-system/bin/switch-to-configuration switch
+
 [group('nixos')]
 _nixos-generations:
     nix-env -p /nix/var/nix/profiles/system --list-generations
 
-# Build and activate new home configuration
 [group('home-manager')]
-_hm-switch:
-  home-manager switch --flake .#{{ username }}@{{ hostname }}
+_hm-switch HOSTNAME: (_validate-hostname HOSTNAME)
+    home-manager switch --flake ".#{{ HOSTNAME }}"
 
-# Build home configuration as a dry-run
 [group('home-manager')]
-_hm-build:
-  home-manager build --flake .#{{ username }}@{{ hostname }}
+_hm-build HOSTNAME: (_validate-hostname HOSTNAME)
+    home-manager build --flake ".#{{ HOSTNAME }}"
 
-# Show current home generations
-[group('home-manager')]
-_hm-generations:
-  home-manager generations --flake .#{{ username }}@{{ hostname }}
-
-# Stow config files
 [group('stow')]
-_stow:
-  #!/usr/bin/env bash
-  for dir in ./stow/*/; do
-      pkg=$(basename "$dir")
-
-      stow -d ./stow -t "$HOME" -R "$pkg"
-  done
+_stow HOSTNAME: (_validate-hostname HOSTNAME)
+    #!/usr/bin/env bash
+    target_file="./hosts/{{ HOSTNAME }}/stow_targets"
+    if [[ -f "$target_file" ]]; then
+        readarray -t pkgs < "$target_file"
+        for pkg in "${pkgs[@]}"; do
+            [[ -n "$pkg" ]] && stow -d ./stow -t "$HOME" -R "$pkg"
+        done
+    else
+        echo "Warning: No stow_targets found at $target_file"
+    fi
