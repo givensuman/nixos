@@ -84,7 +84,6 @@
     cosmic-edit # Prefer GTK
     cosmic-player # ""
     cosmic-reader # ""
-    cosmic-term # Prefer Ghostty
   ];
 
   stylix = {
@@ -123,8 +122,8 @@
   };
 
   catppuccin = {
-    # cursors.enable = true;
-    # gtk.icon.enable = true;
+    cursors.enable = true;
+    gtk.icon.enable = true;
     grub.enable = true;
     tty.enable = true;
   };

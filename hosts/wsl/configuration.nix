@@ -25,7 +25,7 @@
   imports = [
     inputs.wsl.nixosModules.wsl
 
-    ../modules/cli.nix
+    ../modules/commandLine.nix
     ../modules/containers.nix
     ../modules/git.nix
     ../modules/programming.nix

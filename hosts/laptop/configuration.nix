@@ -8,7 +8,7 @@
 
     ../../modules/applications.nix
     ../../modules/bareMetal.nix
-    ../../modules/cli.nix
+    ../../modules/commandLine.nix
     ../../modules/containers.nix
     ../../modules/desktop.nix
     ../../modules/git.nix

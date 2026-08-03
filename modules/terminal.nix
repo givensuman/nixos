@@ -1,4 +1,5 @@
 {
+  pkgs,
   username,
   ...
 }:
@@ -39,4 +40,8 @@
     };
     catppuccin.ghostty.enable = true;
   };
+
+  environment.cosmic.excludePackages = with pkgs; [
+    cosmic-term
+  ];
 }
