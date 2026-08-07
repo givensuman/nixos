@@ -121,6 +121,10 @@
     ];
   };
 
+  environment.systemPackages = with pkgs; [
+    wl-clipboard
+  ];
+
   catppuccin = {
     cursors.enable = true;
     gtk.icon.enable = true;

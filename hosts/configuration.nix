@@ -25,7 +25,6 @@
     git
     less
     util-linux
-    wl-clipboard
     nix-search-tv
     # Internals I've never used...
     libcap
