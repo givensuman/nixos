@@ -47,17 +47,20 @@ update: _go-sudo
     sudo nix flake update
 
 # Upgrade current system
-upgrade: _go-sudo
-    sudo nixos-rebuild --flake ".#{{ hostname }}" switch
+upgrade HOSTNAME=hostname: _go-sudo
+    sudo nixos-rebuild --flake ".#{{ HOSTNAME }}" switch
 
 # Upgrade current system safely, after reboot
-upgrade-safely-requires-reboot:
-    #!/usr/bin/env bash
-    sudo nixos-rebuild --flake ".#{{ hostname }}" boot
+upgrade-safely-requires-reboot HOSTNAME=hostname:
+    sudo nixos-rebuild --flake ".#{{ HOSTNAME }}" boot
 
 # Clean Nix store and remove old generations
 autoremove: _go-sudo
     sudo nix-collect-garbage -d
+
+generate-hardware-configuration HOSTNAME=hostname:
+  nixos-generate-config --show-hardware-config > \
+    ./hosts/{{ HOSTNAME }}/hardware-configuration.nix
 
 [group('nixos')]
 _nixos-switch HOSTNAME:
