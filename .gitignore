@@ -7,3 +7,7 @@ result-*
 
 # Ignore NixOS interactive test driver history
 **/.nixos-test-history
+
+# Local machine-specific state (changes constantly / contains secrets)
+**/fish_variables
+**/hosts.yml
