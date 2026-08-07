@@ -12,7 +12,7 @@
       enableFishIntegration = true;
       installBatSyntax = true;
       settings = {
-        # theme = "catppuccin-mocha";
+        theme = "Catppuccin Mocha";
 
         window-padding-x = 15;
         window-padding-y = 5;

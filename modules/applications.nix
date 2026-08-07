@@ -33,6 +33,7 @@
     firefox
     ghostty
     steam
+    orca-slicer
   ];
 
   home-manager.users.${username} = {
