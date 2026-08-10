@@ -31,9 +31,11 @@
 
   environment.systemPackages = with pkgs; [
     firefox
+    google-chrome
     ghostty
     steam
     orca-slicer
+    freecad
   ];
 
   home-manager.users.${username} = {

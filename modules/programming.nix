@@ -24,9 +24,12 @@ let
     # Snacks.image
     imagemagick
     tectonic
+    ghostscript
+    mermaid-cli
     # Snacks.picker
     sqlite
     # ...
+    luarocks
     luajit
     luajitPackages.rocks-nvim
     statix
