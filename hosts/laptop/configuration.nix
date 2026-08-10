@@ -6,13 +6,14 @@
   imports = [
     inputs.hardware.nixosModules.framework-13-7040-amd
 
+    ../../modules/programming
+
     ../../modules/applications.nix
     ../../modules/bareMetal.nix
     ../../modules/commandLine.nix
     ../../modules/containers.nix
     ../../modules/desktop.nix
     ../../modules/git.nix
-    ../../modules/programming.nix
     ../../modules/terminal.nix
 
     ../configuration.nix

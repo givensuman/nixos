@@ -26,11 +26,12 @@
   imports = [
     inputs.wsl.nixosModules.wsl
 
+    ../../modules/programming
+
     ../../modules/commandLine.nix
     ../../modules/containers.nix
     ../../modules/git.nix
     ../../modules/headless.nix
-    ../../modules/programming.nix
 
     ../configuration.nix
     ./hardware-configuration.nix
