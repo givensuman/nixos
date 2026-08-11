@@ -55,6 +55,7 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+    kernelPackages = pkgs.linuxPackages_latest;
     # Silent Boot
     # https://wiki.archlinux.org/title/Silent_boot
     kernelParams = [
@@ -70,10 +71,20 @@
     initrd.verbose = false;
   };
 
+  # https://wiki.nixos.org/wiki/Hardware/Framework/Laptop_13
+  # > "It is recommended to use power-profiles-daemon
+  # > over tlp for the AMD framework."
+  services.tlp.enable = false;
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+
+  # https://wiki.nixos.org/wiki/USB_storage_devices
+  services.udisks2.enable = true;
+  # Unclear if this is required as well:
+  services.gvfs.enable = true;
+
   # Enable networking.
   networking.networkmanager.enable = true;
+  networking.hostName = hostname;
   hardware.bluetooth.enable = true;
-
-  services.upower.enable = true;
-  services.power-profiles-daemon.enable = true;
 }
