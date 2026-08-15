@@ -4,6 +4,7 @@
   pkgs,
   inputs,
   username,
+  hostname,
   ...
 }:
 {
@@ -64,6 +65,8 @@
       "wheel"
     ];
   };
+
+  networking.hostName = hostname;
 
   home-manager.users.${username} = {
     home = {

@@ -37,9 +37,15 @@
 
   wsl = {
     enable = true;
-    wslConf.automount.root = "/mnt";
-    wslConf.interop.appendWindowsPath = true;
-    wslConf.network.generateHosts = false;
+    wslConf = {
+      automount.root = "/mnt";
+      interop.appendWindowsPath = true;
+      network.generateHosts = false;
+    };
     defaultUser = username;
   };
+
+  environment.systemPackages = with pkgs; [
+    firefox # WSL supports GUIs :pogchamp:
+  ];
 }

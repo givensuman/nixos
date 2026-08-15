@@ -72,7 +72,6 @@
 
   # Enable networking.
   networking.networkmanager.enable = true;
-  networking.hostName = username;
   hardware.bluetooth.enable = true;
 
   services.upower.enable = true;
