@@ -59,4 +59,11 @@ if status is-interactive
     if functions --query fisher
         fisher --version >/dev/null
     end
+
+    # zellij
+    if type -q zellij
+      if not set -q ZELLIJ
+        eval (zellij setup --generate-auto-start fish | string collect)
+      end
+    end
 end
