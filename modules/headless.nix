@@ -10,10 +10,12 @@
       enableBashIntegration = true;
       extraConfig = ''
         keybinds {
-          unbind "Ctrl n"
-          unbind "Ctrl h"
-          unbind "Ctrl s"
-          unbind "Ctrl o"
+          shared_except "locked" {
+            unbind "Ctrl n"
+            unbind "Ctrl h"
+            unbind "Ctrl s"
+            unbind "Ctrl o"
+          }
         }
       '';
       settings = {
