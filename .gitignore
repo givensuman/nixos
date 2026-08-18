@@ -1,13 +1,7 @@
 # Ignore build outputs from performing a nix-build or `nix build` command
 result
 result-*
-
-# Ignore automatically generated direnv output
-.direnv
-
-# Ignore NixOS interactive test driver history
 **/.nixos-test-history
 
-# Local machine-specific state (changes constantly / contains secrets)
-**/fish_variables
-**/hosts.yml
+stow/fish/.config/fish/fish_variables
+stow/gh/.config/gh/hosts.yml
