@@ -94,3 +94,7 @@ _stow HOSTNAME:
     else
         echo "Warning: No stow_targets found at $target_file"
     fi
+
+[group('stow')]
+_stow-target TARGET:
+    stow -d ./stow -t "$HOME" -R "{{ TARGET }}"

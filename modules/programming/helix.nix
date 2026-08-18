@@ -5,7 +5,9 @@
 }:
 {
   environment.systemPackages = with pkgs; [
-    helix
+    # Use /stow for configuration until
+    # plugin support is implemented.
+    steelix
     steel
     steel-language-server
   ];
