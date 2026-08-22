@@ -9,12 +9,14 @@
       enableFishIntegration = true;
       enableBashIntegration = true;
       extraConfig = ''
+        show_startup_tips false
         keybinds {
           shared_except "locked" {
             unbind "Ctrl n"
             unbind "Ctrl h"
             unbind "Ctrl s"
             unbind "Ctrl o"
+            unbind "Ctrl g"
           }
         }
       '';
